@@ -7,9 +7,10 @@ package com.team06.roadangel.model;
  */
 public class User {
     private int userId;
-    private String userName;
-    private String userPw;
-    private int remember;
+    private String userToken;
+//    private String userName;
+//    private String userPw;
+//    private int remember;
 
     public int getUserId() {
         return userId;
@@ -19,27 +20,35 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserToken() {
+        return userToken;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 
-    public String getUserPw() {
-        return userPw;
-    }
-
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
-    }
-
-    public int getRemember() {
-        return remember;
-    }
-
-    public void setRemember(int remember) {
-        this.remember = remember;
-    }
+//    public String getUserName() {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        this.userName = userName;
+//    }
+//
+//    public String getUserPw() {
+//        return userPw;
+//    }
+//
+//    public void setUserPw(String userPw) {
+//        this.userPw = userPw;
+//    }
+//
+//    public int getRemember() {
+//        return remember;
+//    }
+//
+//    public void setRemember(int remember) {
+//        this.remember = remember;
+//    }
 }

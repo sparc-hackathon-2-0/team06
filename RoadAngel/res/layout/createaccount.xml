@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <TextView
+            android:id="@+id/licensePlate"
+            android:text="License Plate #"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"/>
+    <EditText
+            android:id="@+id/editLicensePlate"
+            android:password="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/licensePlate"
+            android:maxLength="8"
+            android:layout_alignParentLeft="true"
+            android:digits="abcdefghijklmnopqrstuvwxyz1234567890"/>
+    <TextView
+            android:id="@+id/state"
+            android:text="State"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/editLicensePlate" />
+    <Spinner
+            android:id="@+id/editState"
+            android:password="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/state"
+            android:layout_alignParentLeft="true"
+            android:prompt="@string/selectstate" />
+    <Button
+            android:id="@+id/createAccountButton"
+            android:text="Submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editState"
+            android:layout_alignParentRight="true"/>
+</RelativeLayout>
