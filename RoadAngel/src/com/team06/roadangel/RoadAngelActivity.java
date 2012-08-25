@@ -75,8 +75,8 @@ public class RoadAngelActivity extends Activity {
 
     private void checkAlerts(String key) {
         //If key exists, see if the user has any alerts
-        RoadAngelService roadAngelService = new RoadAngelService(key, getApplicationContext());
-        int numberOfAlerts = roadAngelService.getAlertCount();
+        RoadAngelService roadAngelService = new RoadAngelService(getApplicationContext());
+        int numberOfAlerts = roadAngelService.getAlertCount(key);
 
         if(numberOfAlerts > 0) {
             Intent intent = new Intent(RoadAngelActivity.this, AlertViewActivity.class);
