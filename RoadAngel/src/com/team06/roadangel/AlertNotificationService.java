@@ -4,10 +4,7 @@ import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.IBinder;
-import android.widget.Toast;
 import com.team06.roadangel.util.XMLParser;
-import org.w3c.dom.Document;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,7 +49,7 @@ public class AlertNotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String tmp = intent.getExtras().getString(getString(R.string.server_tag_varname));
+        String tmp = intent.getExtras().getString(getString(R.string.server_key_varname));
         if (stringIsNotEmpty(tmp)) {
             serverTag = tmp;
             bRunning = true;
@@ -94,7 +91,6 @@ public class AlertNotificationService extends IntentService {
 
     private class AlertNotificationThread implements Runnable {
 
-        @Override
         public void run() {
            while (bRunning) {
                try {
@@ -113,7 +109,7 @@ public class AlertNotificationService extends IntentService {
 
         private String buildAlertRequestUrl(String serverTag) {
             return serverUrl + "/" + getString(R.string.alert_request_url) + "?" +
-                   getString(R.string.alert_request_tag_param) + "=" + serverTag;  //To change body of created methods use File | Settings | File Templates.
+                   getString(R.string.alert_request_key_param) + "=" + serverTag;  //To change body of created methods use File | Settings | File Templates.
         }
 
         private int getAlertCount(String checkAlertResponse) {

@@ -1,0 +1,4 @@
+<resources>
+    <integer name="alert_poll_interval_seconds">600</integer>
+    <integer name="server_connection_timeout_seconds">10</integer>
+</resources>

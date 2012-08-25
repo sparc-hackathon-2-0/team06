@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.model.User;
 
