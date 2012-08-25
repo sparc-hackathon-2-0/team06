@@ -13,7 +13,6 @@ import com.team06.roadangel.helper.FileHelper;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
-    private UserDao persistenceDataSource = null;
     private static final int GET_CODE = 0;
 
     /**
@@ -23,15 +22,6 @@ public class RoadAngelActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-
-        // Make sure the AlertNotificationService is started
-        Intent alertServiceIntent = new Intent(this, AlertNotificationService.class);
-        alertServiceIntent.putExtra(getString(R.string.server_key_varname), "XYZ");
-        startService(alertServiceIntent);
-
-        openDataSource();
-
-        User user = persistenceDataSource.getUser();
 
         // Set the onclick listener for the login button
         Button submitButton = (Button) findViewById(R.id.submitButton);
@@ -52,24 +42,8 @@ public class RoadAngelActivity extends Activity {
 
         // If the user doesn't exist, redirect to the register screen
         if(key != null && key.length() > 0) {
-        // Load the user if they've logged in before
-        //if(user != null) {
-            //currentUser = user;
-
-            //TODO: Start server now
-
-//            TextView userName = (TextView) findViewById(R.id.editUserName);
-//            TextView password = (TextView) findViewById(R.id.editPassword);
-//            CheckBox rememberMe = (CheckBox) findViewById(R.id.editRememberMe);
-//
-//            if (!user.getUserName().isEmpty()) {
-//                userName.setText(user.getUserName());
-//            }
-//
-//            if(!user.getUserPw().isEmpty() && user.getRemember() == 1) {
-//                password.setText(user.getUserPw());
-//                rememberMe.setChecked(true);
-//            }
+            startNotificationService(key);
+            checkAlerts(key);
         }
         // create an account if there's no user (the application hasn't been used yet
         else {
@@ -79,68 +53,36 @@ public class RoadAngelActivity extends Activity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();    //To change body of overridden methods use File | Settings | File Templates.
-        // Make sure the AlertNotificationService is started
-        //Intent intent = new Intent(this, AlertNotificationService.class);
-        //intent.getExtras().putString(getString(R.string.server_tag_varname), "XYZ");
-        //startService(intent);
-    }
-
-    private void openDataSource() {
-        if(persistenceDataSource == null) {
-            persistenceDataSource = new UserDao(this);
-        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GET_CODE){
             if (resultCode == RESULT_OK) {
-                //TODO: Start server
+                Bundle bundle = data.getExtras();
+                String key = (String) bundle.get("key");
+                startNotificationService(key);
+                checkAlerts(key);
             }
         }
     }
 
-    /**
-    private void doLogin() {
-        TextView userName = (TextView) findViewById(R.id.editUserName);
-        TextView password = (TextView) findViewById(R.id.editPassword);
-        CheckBox remember = (CheckBox) findViewById(R.id.editRememberMe);
+    private void startNotificationService(String key) {
+        // Make sure the AlertNotificationService is started
+        Intent alertServiceIntent = new Intent(this, AlertNotificationService.class);
+        alertServiceIntent.putExtra(getString(R.string.server_key_varname), key);
+        startService(alertServiceIntent);
+    }
 
-        String userNameString = userName.getText().toString();
-        String userPassword = password.getText().toString();
-        boolean rememberMe = remember.isChecked();
+    private void checkAlerts(String key) {
+        //If key exists, see if the user has any alerts
+        RoadAngelService roadAngelService = new RoadAngelService(key, getApplicationContext());
+        int numberOfAlerts = roadAngelService.getAlertCount();
 
-        boolean loginSuccessful = true;
-        //TODO: Do login here.
-        if(loginSuccessful) {
-            if(currentUser == null) {
-                if(rememberMe) {
-                    persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
-                }
-                else {
-                    persistenceDataSource.createUser(userNameString, "", rememberMe);
-                }
-            }
-            else {
-                if(rememberMe) {
-                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
-                }
-                else {
-                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, "", rememberMe);
-                }
-
-            }
+        if(numberOfAlerts > 0) {
+            Intent intent = new Intent(RoadAngelActivity.this, AlertViewActivity.class);
+            startActivity(intent);
         }
-
-        //TODO: Call send message screen
-
-        Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
-        toast.show();
-    }*/
+    }
 
     private void sendMessage() {
 

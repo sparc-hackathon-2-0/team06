@@ -93,6 +93,7 @@ public class CreateAccountActivity extends Activity {
         if(accountCreated) {
         	// Redirect to the send message
         	Intent intent = new Intent();
+            intent.putExtra("key", xml);
         	setResult(RESULT_OK, intent);
         	finish();
         }

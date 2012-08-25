@@ -28,7 +28,7 @@ public class AlertViewActivity extends ListActivity {
 
     private void getAlerts() {
         List<String> alerts = new ArrayList<String>();
-
+        alerts.add("You have an alert");
         //TODO: Get alerts
 
         adapter = new AlertListAdapter(context, R.layout.alert, alerts);
