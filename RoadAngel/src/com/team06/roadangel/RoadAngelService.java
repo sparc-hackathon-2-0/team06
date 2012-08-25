@@ -43,6 +43,10 @@ public class RoadAngelService {
         return 0;
     }
 
+    public String register(String licensePlate, String state) {
+        return "";
+    }
+
     private String buildAlertRequestUrl(String serverKey) {
         return serverUrl + "/" + appContext.getString(R.string.alert_request_url) + "?" +
                 appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
