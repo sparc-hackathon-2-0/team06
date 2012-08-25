@@ -1,54 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
     <ImageView
-            android:id="@+id/logoView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:id="@+id/logoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="27dp"
+        android:src="@drawable/logo_splash" />
+    
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username" 
+        android:layout_below="@id/logoView"
+        />
+
+    <EditText
+        android:id="@+id/editUserName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/userName" />
 
     <TextView
-            android:id="@+id/userName"
-            android:text="Username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/logoView" />
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/editUserName"
+        android:text="Password" />
+
     <EditText
-            android:id="@+id/editUserName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/userName"
-            android:layout_alignParentLeft="true"
-            />
-    <TextView
-            android:id="@+id/password"
-            android:text="Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/editUserName" />
-    <EditText
-            android:id="@+id/editPassword"
-            android:password="true"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/password"
-            android:layout_alignParentLeft="true"/>
+        android:id="@+id/editPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/password"
+        android:password="true" />
+
     <CheckBox
-            android:id="@+id/editRememberMe"
-            android:text="Remember Me"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/editPassword"
-            android:layout_alignParentLeft="true"/>
-    <Button
-            android:id="@+id/submitButton"
-            android:text="Submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editRememberMe"
-            android:layout_alignParentRight="true"/>
-</RelativeLayout>
+        android:id="@+id/editRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/editPassword"
+        android:text="Remember Me" />
 
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/editRememberMe"
+        android:text="Submit" />
+
+    
+
+</RelativeLayout>
