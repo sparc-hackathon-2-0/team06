@@ -2,7 +2,10 @@ package com.team06.roadangel;
 
 import android.content.Context;
 import android.text.StaticLayout;
+import com.team06.roadangel.model.Alert;
 import com.team06.roadangel.util.XMLParser;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,6 +53,10 @@ public class RoadAngelService {
         return "";
     }
 
+    public List<Alert> getAlerts(String serverKey) {
+        return null;
+    }
+
     private String buildAlertRequestUrl(String serverKey) {
         return serverUrl + "/" + appContext.getString(R.string.alert_request_url) + "?" +
                 appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
@@ -60,6 +67,11 @@ public class RoadAngelService {
                 appContext.getString(R.string.register_request_license_plate_param) + "=" + licensePlate +
                 "&" + appContext.getString(R.string.register_request_state_param) + "=" + state;
     }
+
+//    private String buildAlertsRequestUrl(String serverKey) {
+//        return serverUrl + "/" + appContext.getString(R.string.) + "?" +
+//                appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
+//    }
 
     private int getAlertCountFromResponse(String checkAlertResponse) {
         try {

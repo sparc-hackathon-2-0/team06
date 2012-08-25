@@ -8,6 +8,14 @@
     <string name="register_request_url">register</string>
     <string name="register_request_license_plate_param">licensePlate</string>
     <string name="register_request_state_param">state</string>
+    <string name="get_alerts_request_url">getAlerts</string>
+    <string name="get_alerts_request_key_param">key</string>
+    <string name="clear_alerts_request_url">clearAlerts</string>
+    <string name="clear_alerts_request_key_param">key</string>
+    <string name="put_alert_request_url">putAlert</string>
+    <string name="put_alert_request_key_param">key</string>
+    <string name="put_alert_request_license_plate_param">licensePlate</string>
+    <string name="put_alert_request_state_param">state</string>
     <string name="alert_ticker_text">New Alert Received</string>
     <string name="alert_title">New Road Angel Alerts</string>
     <string name="alert_text_prefix">You have</string>

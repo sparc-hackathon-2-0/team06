@@ -78,7 +78,6 @@ public class CreateAccountActivity extends Activity {
         if(key != null && !key.isEmpty()) {
         	accountCreated = true;
 
-
         	// Write our key to a file
         	try {
         		FileHelper.write(getCacheDir(), "user", key);
