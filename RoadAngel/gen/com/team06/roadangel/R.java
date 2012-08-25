@@ -10,6 +10,15 @@ package com.team06.roadangel;
 public final class R {
     public static final class attr {
     }
+    public static final class id {
+        public static final int editPassword=0x7f040004;
+        public static final int editRememberMe=0x7f040005;
+        public static final int editUserName=0x7f040002;
+        public static final int logoView=0x7f040000;
+        public static final int password=0x7f040003;
+        public static final int submitButton=0x7f040006;
+        public static final int userName=0x7f040001;
+    }
     public static final class layout {
         public static final int main=0x7f020000;
     }
