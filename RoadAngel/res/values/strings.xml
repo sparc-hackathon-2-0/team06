@@ -6,6 +6,8 @@
     <string name="alert_request_key_param">key</string>
     <string name="server_key_varname">serverKey</string>
     <string name="selectstate">Select State</string>
+    <string name="alertHeaderMsg">A Road Angel has sent you the following alert:</string>
+    <string name="alertHeaderMsgs">Road Angels have sent you the following alerts:</string>
     <string-array name="states">
         <item>AL</item>
         <item>AK</item>
