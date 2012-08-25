@@ -36,18 +36,18 @@ public class RoadAngelActivity extends Activity {
         if(user != null) {
             currentUser = user;
 
-            TextView userName = (TextView) findViewById(R.id.editUserName);
-            TextView password = (TextView) findViewById(R.id.editPassword);
-            CheckBox rememberMe = (CheckBox) findViewById(R.id.editRememberMe);
+//            TextView userName = (TextView) findViewById(R.id.editUserName);
+//            TextView password = (TextView) findViewById(R.id.editPassword);
+//            CheckBox rememberMe = (CheckBox) findViewById(R.id.editRememberMe);
 
-            if (!user.getUserName().isEmpty()) {
-                userName.setText(user.getUserName());
-            }
-
-            if(!user.getUserPw().isEmpty() && user.getRemember() == 1) {
-                password.setText(user.getUserPw());
-                rememberMe.setChecked(true);
-            }
+//            if (!user.getUserName().isEmpty()) {
+//                userName.setText(user.getUserName());
+//            }
+//
+//            if(!user.getUserPw().isEmpty() && user.getRemember() == 1) {
+//               password.setText(user.getUserPw());
+//                rememberMe.setChecked(true);
+//            }
         }
 
         // Make sure the AlertNotificationService is started
