@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
 import com.team06.roadangel.dao.UserDao;
+import com.team06.roadangel.helper.FileHelper;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
@@ -24,9 +27,9 @@ public class RoadAngelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        openDataSource();
+        //openDataSource();
 
-        User user = persistenceDataSource.getUser();
+        //User user = persistenceDataSource.getUser();
 
         // Set the onclick listener for the login button
         Button submitButton = (Button) findViewById(R.id.submitButton);
@@ -43,9 +46,12 @@ public class RoadAngelActivity extends Activity {
                 createFromResource(this, R.array.messages, android.R.layout.simple_spinner_dropdown_item);
         messageList.setAdapter(messageListAdapter);
 
-        // Load the user if they've logged in before
-        if(user != null) {
-            currentUser = user;
+        String key = FileHelper.loadFile(getCacheDir(), "user");
+    	
+        // If the user doesn't exist, redirect to the register screen
+        if(key != null && key.length() > 0) {
+        
+//            currentUser = user;
 
             //TODO: Start server now
 

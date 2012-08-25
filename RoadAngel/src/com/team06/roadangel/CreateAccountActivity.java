@@ -1,5 +1,7 @@
 package com.team06.roadangel;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.team06.roadangel.helper.FileHelper;
+import com.team06.roadangel.util.XMLParser;
 
 /**
  * User: David.Pechacek
@@ -30,55 +35,65 @@ public class CreateAccountActivity extends Activity {
         // Set the onclick listener for the login button
         Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
         createAccountButton.setOnClickListener(new SubmitButtonListener());
+        
+        // Set the onskip listener for the login button
+        Button skipButton = (Button) findViewById(R.id.skipButton);
+        skipButton.setOnClickListener(new SkipButtonListener());
     }
 
-//    private boolean isValidEmail(String emailAddress) {
-//        boolean valid = false;
-//        String emailPattern = ".+@.+\\.[a-z]+";
-//        try {
-//            Pattern pattern = Pattern.compile(emailPattern);
-//            Matcher matcher = pattern.matcher(emailAddress);
-//            valid = matcher.matches();
-//        }
-//        catch (RuntimeException ex) {
-//            Log.e("RoadAngel: ", Log.getStackTraceString(ex));
-//        }
-//
-//        return valid;
-//    }
-
     private void createAccount() {
-//        EditText userName = (EditText) findViewById(R.id.editEmail);
-//        EditText password = (EditText) findViewById(R.id.editAccountPassword);
         EditText licensePlate = (EditText) findViewById(R.id.editLicensePlate);
         Spinner state = (Spinner) findViewById(R.id.editState);
 
-//        String userNameString = userName.getText().toString();
-//        String passwordString = password.getText().toString();
         String licensePlateString = licensePlate.getText().toString();
         String stateString = state.getSelectedItem().toString();
 
+        boolean validated = true;
+        
         if(licensePlateString.isEmpty() || stateString.isEmpty()) {//passwordString.isEmpty() || userNameString.isEmpty()
             Toast toast = Toast.makeText(getApplicationContext(), "All fields must be filled in", Toast.LENGTH_SHORT);
             toast.show();
+            validated = false;
         }
         else if(licensePlateString.length() < 6) {
             Toast toast = Toast.makeText(getApplicationContext(), "License Plate must be at least six characters", Toast.LENGTH_SHORT);
             toast.show();
+            validated = false;
         }
-//        else if(isValidEmail(userNameString)) {
-//            Toast toast = Toast.makeText(getApplicationContext(), "Please enter a valid email", Toast.LENGTH_SHORT);
-//            toast.show();
-//        }
 
+        if(!validated) {
+        	return;
+        }
+        
+        // Create the account
+        String url = "http://192.168.8.151:8080/RoadAngel/register?licensePlate=" + licensePlateString + "&state=" + stateString;
+        XMLParser parser = new XMLParser();
+        String xml = parser.getXmlFromUrl(url, 10 * 1000, 10 * 1000);
+     
         boolean accountCreated = true;
 
-        //TODO: Do account creation here
-
+        if(xml != null && xml.length() > 0) {
+        	accountCreated = true;
+        	
+        	// Write our key to a file
+        	try {
+        		FileHelper.write(getCacheDir(), "user", xml);
+        	}
+        	catch(IOException e) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Could not write to file, please try again.", Toast.LENGTH_SHORT);
+        		toast.show();
+        		accountCreated = false;
+        	}
+        }
+        else {
+        	accountCreated = false;
+        }
+        
         if(accountCreated) {
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
+        	// Redirect to the send message
+        	Intent intent = new Intent();
+        	setResult(RESULT_OK, intent);
+        	finish();
         }
         else {
             Toast toast = Toast.makeText(getApplicationContext(), "Account creation failed, please try again.", Toast.LENGTH_SHORT);
@@ -89,6 +104,14 @@ public class CreateAccountActivity extends Activity {
     private class SubmitButtonListener implements AdapterView.OnClickListener {
         public void onClick(View view) {
             createAccount();
+        }
+    }
+    
+    private class SkipButtonListener implements AdapterView.OnClickListener {
+        public void onClick(View view) {
+        	Intent intent = new Intent();
+        	setResult(RESULT_OK, intent);
+        	finish();
         }
     }
 }
