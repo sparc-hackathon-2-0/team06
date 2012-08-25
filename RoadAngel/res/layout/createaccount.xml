@@ -25,8 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/licensePlate"
             android:maxLength="8"
-            android:layout_alignParentLeft="true"
-            android:digits="abcdefghijklmnopqrstuvwxyz1234567890"/>
+            android:layout_alignParentLeft="true"/>
     <TextView
             android:id="@+id/state"
             android:text="State"
