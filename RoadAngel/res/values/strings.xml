@@ -10,6 +10,8 @@
     <string name="alert_text_prefix">You have</string>
     <string name="alert_text_suffix">new Road Angel Alerts</string>
     <string name="selectstate">Select State</string>
+    <string name="alertHeaderMsg">A Road Angel has sent you the following alert:</string>
+    <string name="alertHeaderMsgs">Road Angels have sent you the following alerts:</string>
     <string-array name="states">
         <item>AL</item>
         <item>AK</item>
@@ -66,6 +68,13 @@
     <string-array name="messages">
         <item>Your tire is flat.</item>
         <item>Your car is smoking.</item>
-        <item>Your car tail light is out.</item>
+        <item>Your car\'s tail light is out.</item>
+        <item>Your car is dragging something.</item>
+        <item>Your car\'s brake lights are out.</item>
+        <item>Your turn signal isn\'t working.</item>
+        <item>Something is on top of your car.</item>
+        <item>Your car\'s gas cap is open.</item>
+        <item>Your car\'s trunk is open.</item>
+        <item>Something you were carrying fell.</item>
     </string-array>
 </resources>

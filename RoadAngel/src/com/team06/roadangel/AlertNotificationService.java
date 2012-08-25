@@ -4,10 +4,7 @@ import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.IBinder;
-import android.widget.Toast;
 import com.team06.roadangel.util.XMLParser;
-import org.w3c.dom.Document;
 
 /**
  * Created with IntelliJ IDEA.
@@ -76,7 +73,6 @@ public class AlertNotificationService extends IntentService {
 
     private class AlertNotificationThread implements Runnable {
 
-        @Override
         public void run() {
            while (bRunning) {
                int alertCount = roadAngelService.getAlertCount();

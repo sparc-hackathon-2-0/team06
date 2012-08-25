@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <ImageView
+            android:id="@+id/alertLogoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="27dp"
+            android:src="@drawable/logo_splash" />
+    <TextView
+            android:id="@+id/alertHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alertLogoView"/>
+    <Button
+            android:id="@+id/clearAlertsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Clear Alerts"
+
+            android:layout_alignParentBottom="true"/>
+    <ListView
+            android:id="@+id/alertList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alertHeader"
+            android:layout_above="@id/clearAlertsButton"/>
+</RelativeLayout>
