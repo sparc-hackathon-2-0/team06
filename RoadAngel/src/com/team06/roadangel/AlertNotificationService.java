@@ -51,7 +51,7 @@ public class AlertNotificationService extends IntentService {
     private void createNotification(int alertCount) {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
-        int icon = R.drawable.icon;
+        int icon = R.drawable.notification_icon;
         CharSequence tickerText = getString(R.string.alert_ticker_text);
         long when = System.currentTimeMillis();
 
