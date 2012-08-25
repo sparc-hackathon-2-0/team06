@@ -10,9 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="27dp"
-        android:src="@drawable/logo_splash" />
+	/>
 
     <TextView
             android:id="@+id/selectMessage"

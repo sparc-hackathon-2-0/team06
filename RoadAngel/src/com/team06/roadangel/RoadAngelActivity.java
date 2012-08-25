@@ -43,9 +43,13 @@ public class RoadAngelActivity extends Activity {
                 createFromResource(this, R.array.messages, android.R.layout.simple_spinner_dropdown_item);
         messageList.setAdapter(messageListAdapter);
 
+        String key = FileHelper.loadFile(getCacheDir(), "user");
+
+        // If the user doesn't exist, redirect to the register screen
+        if(key != null && key.length() > 0) {
         // Load the user if they've logged in before
-        if(user != null) {
-            currentUser = user;
+        //if(user != null) {
+            //currentUser = user;
 
             //TODO: Start server now
 
@@ -96,42 +100,42 @@ public class RoadAngelActivity extends Activity {
     }
 
     /**
-     private void doLogin() {
-     TextView userName = (TextView) findViewById(R.id.editUserName);
-     TextView password = (TextView) findViewById(R.id.editPassword);
-     CheckBox remember = (CheckBox) findViewById(R.id.editRememberMe);
+    private void doLogin() {
+        TextView userName = (TextView) findViewById(R.id.editUserName);
+        TextView password = (TextView) findViewById(R.id.editPassword);
+        CheckBox remember = (CheckBox) findViewById(R.id.editRememberMe);
 
-     String userNameString = userName.getText().toString();
-     String userPassword = password.getText().toString();
-     boolean rememberMe = remember.isChecked();
+        String userNameString = userName.getText().toString();
+        String userPassword = password.getText().toString();
+        boolean rememberMe = remember.isChecked();
 
-     boolean loginSuccessful = true;
-     //TODO: Do login here.
-     if(loginSuccessful) {
-     if(currentUser == null) {
-     if(rememberMe) {
-     persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
-     }
-     else {
-     persistenceDataSource.createUser(userNameString, "", rememberMe);
-     }
-     }
-     else {
-     if(rememberMe) {
-     persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
-     }
-     else {
-     persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, "", rememberMe);
-     }
+        boolean loginSuccessful = true;
+        //TODO: Do login here.
+        if(loginSuccessful) {
+            if(currentUser == null) {
+                if(rememberMe) {
+                    persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
+                }
+                else {
+                    persistenceDataSource.createUser(userNameString, "", rememberMe);
+                }
+            }
+            else {
+                if(rememberMe) {
+                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
+                }
+                else {
+                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, "", rememberMe);
+                }
 
-     }
-     }
+            }
+        }
 
-     //TODO: Call send message screen
+        //TODO: Call send message screen
 
-     Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
-     toast.show();
-     }*/
+        Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
+        toast.show();
+    }*/
 
     private void sendMessage() {
 
