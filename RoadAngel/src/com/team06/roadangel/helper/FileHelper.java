@@ -12,9 +12,9 @@ public class FileHelper {
 	public static String loadFile(File cacheDir, String filename) {
 	
 		// Get our data dir
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+        /*if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
             cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"RoadAngel");
-        }
+        }*/
         
         boolean doneLoading = false;
         String xml = "";
@@ -52,11 +52,17 @@ public class FileHelper {
 	
 	public static void write(File cacheDir, String filename, String xml) throws IOException {
 		// Get our data dir
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+        /*if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
             cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"RoadAngel");
+        }*/
+        
+        if(!cacheDir.exists()) {
+        	cacheDir.mkdir();
         }
 		
-		FileOutputStream fos = new FileOutputStream(new File(cacheDir, filename));
+        File f = new File(cacheDir, filename);
+        f.createNewFile();
+		FileOutputStream fos = new FileOutputStream(f);
 		fos.write(xml.getBytes());
 		fos.flush();
 		fos.close();

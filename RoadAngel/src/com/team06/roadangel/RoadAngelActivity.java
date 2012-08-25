@@ -14,7 +14,6 @@ import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private UserDao persistenceDataSource = null;
-    private static User currentUser = null;
     private static final int GET_CODE = 0;
 
     /**
