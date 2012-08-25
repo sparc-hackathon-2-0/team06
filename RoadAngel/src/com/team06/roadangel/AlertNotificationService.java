@@ -23,15 +23,17 @@ public class AlertNotificationService extends IntentService {
 
     private NotificationManager notificationManager;
 
+    private String serverKey;
+
     public AlertNotificationService() {
         super (AlertNotificationService.class.getName());
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String serverKey = intent.getExtras().getString(getString(R.string.server_key_varname));
+        serverKey = intent.getExtras().getString(getString(R.string.server_key_varname));
         if (stringIsNotEmpty(serverKey)) {
-            roadAngelService = new RoadAngelService(serverKey, this.getApplicationContext());
+            roadAngelService = new RoadAngelService(getApplicationContext());
             bRunning = true;
             Thread alertNotificationThread = new Thread(new AlertNotificationThread());
             alertNotificationThread.run();
@@ -75,7 +77,7 @@ public class AlertNotificationService extends IntentService {
 
         public void run() {
            while (bRunning) {
-               int alertCount = roadAngelService.getAlertCount();
+               int alertCount = roadAngelService.getAlertCount(serverKey);
                if (alertCount > 0) {
                    createNotification(alertCount);
                }

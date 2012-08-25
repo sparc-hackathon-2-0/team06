@@ -22,9 +22,14 @@ import com.team06.roadangel.util.XMLParser;
  * Time: 1:00 PM
  */
 public class CreateAccountActivity extends Activity {
+
+    private RoadAngelService roadAngelService;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.createaccount);
+
+        roadAngelService = new RoadAngelService(getApplicationContext());
 
         Spinner stateList = (Spinner) findViewById(R.id.editState);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.
@@ -66,19 +71,17 @@ public class CreateAccountActivity extends Activity {
         }
         
         // Create the account
-        String url = "http://192.168.8.151:8080/RoadAngel/register?licensePlate=" + licensePlateString + "&state=" + stateString;
-        XMLParser parser = new XMLParser();
-        String xml = parser.getXmlFromUrl(url, 10 * 1000, 10 * 1000);
+        String key = roadAngelService.register(licensePlateString,stateString);
      
         boolean accountCreated = true;
 
-        if(xml != null && xml.length() > 0) {
+        if(key != null && !key.isEmpty()) {
         	accountCreated = true;
 
 
         	// Write our key to a file
         	try {
-        		FileHelper.write(getCacheDir(), "user", xml);
+        		FileHelper.write(getCacheDir(), "user", key);
         	}
         	catch(IOException e) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Could not write to file: " + e + ", please try again.", Toast.LENGTH_SHORT);
