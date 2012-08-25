@@ -123,9 +123,14 @@ public class RoadAngelActivity extends Activity {
         toast.show();
     }*/
 
+    private void sendMessage() {
+
+    }
+
     private class SubmitButtonListener implements AdapterView.OnClickListener {
         public void onClick(View view) {
             //doLogin();
+            sendMessage();
         }
     }
 }

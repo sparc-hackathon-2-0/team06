@@ -17,16 +17,17 @@ public final class R {
     public static final class id {
         public static final int createAccountButton=0x7f050004;
         public static final int editLicensePlate=0x7f050001;
-        public static final int editPassword=0x7f050009;
-        public static final int editRememberMe=0x7f05000a;
         public static final int editState=0x7f050003;
-        public static final int editUserName=0x7f050007;
+        public static final int enterLicense=0x7f050009;
+        public static final int enterLicensePlate=0x7f050008;
         public static final int licensePlate=0x7f050000;
         public static final int logoView=0x7f050005;
-        public static final int password=0x7f050008;
+        public static final int messageSelect=0x7f050007;
+        public static final int selectMessage=0x7f050006;
+        public static final int selectState=0x7f05000b;
+        public static final int selectStateLabel=0x7f05000a;
         public static final int state=0x7f050002;
-        public static final int submitButton=0x7f05000b;
-        public static final int userName=0x7f050006;
+        public static final int submitButton=0x7f05000c;
     }
     public static final class layout {
         public static final int createaccount=0x7f020000;

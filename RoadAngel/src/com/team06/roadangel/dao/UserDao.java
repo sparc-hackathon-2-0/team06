@@ -18,9 +18,11 @@ public class UserDao {
     private SQLiteDatabase database = null;
     private UserDatabaseHandler dbHelper= null;
     private String[] allColumns = {UserDatabaseHandler.COLUMN_ID,
-            UserDatabaseHandler.COLUMN_USER_NAME,
-            UserDatabaseHandler.COLUMN_USER_PW,
-            UserDatabaseHandler.COLUMN_REMEMBER};
+                                   UserDatabaseHandler.COLUMN_USER_TOKEN};
+
+//            UserDatabaseHandler.COLUMN_USER_NAME,
+//            UserDatabaseHandler.COLUMN_USER_PW,
+//            UserDatabaseHandler.COLUMN_REMEMBER};
 
     public UserDao(Context context) {
         dbHelper = new UserDatabaseHandler(context);
@@ -34,13 +36,13 @@ public class UserDao {
         dbHelper.close();
     }
 
-    public boolean createUser(String userName, String password, boolean rememberMe) {
+    public boolean createUser(String userToken) {
         boolean success = false;
         int remember = 0;
 
-        if(rememberMe) {
-            remember = 1;
-        }
+//        if(rememberMe) {
+//            remember = 1;
+//        }
 
         try {
             open();
@@ -48,9 +50,10 @@ public class UserDao {
             ContentValues values = new ContentValues();
 
             // insert values
-            values.put(UserDatabaseHandler.COLUMN_USER_NAME, userName);
-            values.put(UserDatabaseHandler.COLUMN_USER_PW, password);
-            values.put(UserDatabaseHandler.COLUMN_REMEMBER, remember);
+            values.put(UserDatabaseHandler.COLUMN_USER_TOKEN, userToken);
+//            values.put(UserDatabaseHandler.COLUMN_USER_NAME, userName);
+//            values.put(UserDatabaseHandler.COLUMN_USER_PW, password);
+//            values.put(UserDatabaseHandler.COLUMN_REMEMBER, remember);
 
 
             long insertId = database.insert(UserDatabaseHandler.TABLE_USER, null, values);
@@ -68,42 +71,42 @@ public class UserDao {
 
         return success;
     }
-
-    public boolean updateUser(int userId, String userName, String password, boolean rememberMe) {
-        boolean success = false;
-        int remember = 0;
-
-        if(rememberMe) {
-            remember = 1;
-        }
-
-        try {
-            open();
-
-            ContentValues values = new ContentValues();
-
-            // insert values
-            values.put(UserDatabaseHandler.COLUMN_ID, userId);
-            values.put(UserDatabaseHandler.COLUMN_USER_NAME, userName);
-            values.put(UserDatabaseHandler.COLUMN_USER_PW, password);
-            values.put(UserDatabaseHandler.COLUMN_REMEMBER, remember);
-
-            long insertId = database.update(UserDatabaseHandler.TABLE_USER, values,
-                    UserDatabaseHandler.COLUMN_ID + "='" + userId + "'", null);
-
-            if(insertId > 0) {
-                success = true;
-            }
-        }
-        catch (SQLException ex) {
-            Log.e("RoadAngel: ", Log.getStackTraceString(ex));
-        }
-        finally {
-            close();
-        }
-
-        return success;
-    }
+//
+//    public boolean updateUser(int userId, String userName, String password, boolean rememberMe) {
+//        boolean success = false;
+//        int remember = 0;
+//
+//        if(rememberMe) {
+//            remember = 1;
+//        }
+//
+//        try {
+//            open();
+//
+//            ContentValues values = new ContentValues();
+//
+//            // insert values
+//            values.put(UserDatabaseHandler.COLUMN_ID, userId);
+//            values.put(UserDatabaseHandler.COLUMN_USER_NAME, userName);
+//            values.put(UserDatabaseHandler.COLUMN_USER_PW, password);
+//            values.put(UserDatabaseHandler.COLUMN_REMEMBER, remember);
+//
+//            long insertId = database.update(UserDatabaseHandler.TABLE_USER, values,
+//                    UserDatabaseHandler.COLUMN_ID + "='" + userId + "'", null);
+//
+//            if(insertId > 0) {
+//                success = true;
+//            }
+//        }
+//        catch (SQLException ex) {
+//            Log.e("RoadAngel: ", Log.getStackTraceString(ex));
+//        }
+//        finally {
+//            close();
+//        }
+//
+//        return success;
+//    }
 
     public User getUser() {
         User user = null;
@@ -134,32 +137,33 @@ public class UserDao {
 
         if(cursor != null) {
             user.setUserId(cursor.getInt(0));
-            user.setUserName(cursor.getString(1));
-            user.setUserPw(cursor.getString(2));
-            user.setRemember(cursor.getInt(3));
+            user.setUserToken(cursor.getString(1));
+//            user.setUserName(cursor.getString(1));
+//            user.setUserPw(cursor.getString(2));
+//            user.setRemember(cursor.getInt(3));
         }
 
         return user;
     }
 
-    private boolean userExists(int userId) {
-        boolean success = false;
-
-        try {
-            Cursor cursor = database.query(UserDatabaseHandler.TABLE_USER,
-                    allColumns, UserDatabaseHandler.COLUMN_ID + " = '" + userId + "'",
-                    null, null, null, null);
-
-            if(cursor.getCount() > 0) {
-                success = true;
-            }
-
-            cursor.close();
-        }
-        catch(SQLException ex) {
-            Log.e("RoadAngel: ", Log.getStackTraceString(ex));
-        }
-
-        return success;
-    }
+//    private boolean userExists(int userId) {
+//        boolean success = false;
+//
+//        try {
+//            Cursor cursor = database.query(UserDatabaseHandler.TABLE_USER,
+//                    allColumns, UserDatabaseHandler.COLUMN_ID + " = '" + userId + "'",
+//                    null, null, null, null);
+//
+//            if(cursor.getCount() > 0) {
+//                success = true;
+//            }
+//
+//            cursor.close();
+//        }
+//        catch(SQLException ex) {
+//            Log.e("RoadAngel: ", Log.getStackTraceString(ex));
+//        }
+//
+//        return success;
+//    }
 }
