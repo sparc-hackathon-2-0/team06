@@ -62,6 +62,13 @@
     <string-array name="messages">
         <item>Your tire is flat.</item>
         <item>Your car is smoking.</item>
-        <item>Your car tail light is out.</item>
+        <item>Your car\'s tail light is out.</item>
+        <item>Your car is dragging something.</item>
+        <item>Your car\'s brake lights are out.</item>
+        <item>Your turn signal isn\'t working.</item>
+        <item>Something is on top of your car.</item>
+        <item>Your car\'s gas cap is open.</item>
+        <item>Your car\'s trunk is open.</item>
+        <item>You lost something that you were hauling.</item>
     </string-array>
 </resources>

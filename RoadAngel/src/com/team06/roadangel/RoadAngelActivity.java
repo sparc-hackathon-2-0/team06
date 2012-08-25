@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private UserDao persistenceDataSource = null;
     private static User currentUser = null;
+    private static final int GET_CODE = 0;
 
     /**
      * Called when the activity is first created.
@@ -36,24 +34,35 @@ public class RoadAngelActivity extends Activity {
         if(user != null) {
             currentUser = user;
 
+            //TODO: Start server now
+
 //            TextView userName = (TextView) findViewById(R.id.editUserName);
 //            TextView password = (TextView) findViewById(R.id.editPassword);
 //            CheckBox rememberMe = (CheckBox) findViewById(R.id.editRememberMe);
-
+//
 //            if (!user.getUserName().isEmpty()) {
 //                userName.setText(user.getUserName());
 //            }
 //
 //            if(!user.getUserPw().isEmpty() && user.getRemember() == 1) {
-//               password.setText(user.getUserPw());
+//                password.setText(user.getUserPw());
 //                rememberMe.setChecked(true);
 //            }
         }
+        // create an account if there's no user (the application hasn't been used yet
+        else {
+            Intent intent = new Intent(RoadAngelActivity.this, CreateAccountActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();    //To change body of overridden methods use File | Settings | File Templates.
         // Make sure the AlertNotificationService is started
-        Intent intent = new Intent(this, AlertNotificationService.class);
-        intent.putExtra(getString(R.string.server_tag_varname), "XYZ");
-        startService(intent);
+        //Intent intent = new Intent(this, AlertNotificationService.class);
+        //intent.getExtras().putString(getString(R.string.server_tag_varname), "XYZ");
+        //startService(intent);
     }
 
     private void openDataSource() {
@@ -62,6 +71,18 @@ public class RoadAngelActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GET_CODE){
+            if (resultCode == RESULT_OK) {
+                //TODO: Start server
+            }
+        }
+    }
+
+    /**
     private void doLogin() {
         TextView userName = (TextView) findViewById(R.id.editUserName);
         TextView password = (TextView) findViewById(R.id.editPassword);
@@ -75,10 +96,21 @@ public class RoadAngelActivity extends Activity {
         //TODO: Do login here.
         if(loginSuccessful) {
             if(currentUser == null) {
-                persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
+                if(rememberMe) {
+                    persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
+                }
+                else {
+                    persistenceDataSource.createUser(userNameString, "", rememberMe);
+                }
             }
             else {
-                persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
+                if(rememberMe) {
+                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
+                }
+                else {
+                    persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, "", rememberMe);
+                }
+
             }
         }
 
@@ -86,11 +118,16 @@ public class RoadAngelActivity extends Activity {
 
         Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
         toast.show();
+    }*/
+
+    private void sendMessage() {
+
     }
 
     private class SubmitButtonListener implements AdapterView.OnClickListener {
         public void onClick(View view) {
-            doLogin();
+            //doLogin();
+            sendMessage();
         }
     }
 }
