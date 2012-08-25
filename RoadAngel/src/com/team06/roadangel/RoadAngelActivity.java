@@ -9,11 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.team06.roadangel.dao.UserDao;
+import com.team06.roadangel.helper.FileHelper;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private UserDao persistenceDataSource = null;
-    private static User currentUser = null;
     private static final int GET_CODE = 0;
 
     /**
@@ -43,9 +43,13 @@ public class RoadAngelActivity extends Activity {
                 createFromResource(this, R.array.messages, android.R.layout.simple_spinner_dropdown_item);
         messageList.setAdapter(messageListAdapter);
 
+        String key = FileHelper.loadFile(getCacheDir(), "user");
+
+        // If the user doesn't exist, redirect to the register screen
+        if(key != null && key.length() > 0) {
         // Load the user if they've logged in before
-        if(user != null) {
-            currentUser = user;
+        //if(user != null) {
+            //currentUser = user;
 
             //TODO: Start server now
 
