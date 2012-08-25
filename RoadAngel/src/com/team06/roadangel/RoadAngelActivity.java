@@ -52,7 +52,7 @@ public class RoadAngelActivity extends Activity {
 
         // Make sure the AlertNotificationService is started
         Intent intent = new Intent(this, AlertNotificationService.class);
-        intent.putExtra(getString(R.string.server_tag_varname), "XYZ");
+        intent.putExtra(getString(R.string.server_key_varname), "XYZ");
         startService(intent);
     }
 
