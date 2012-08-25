@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.team06.roadangel.dao.UserDao;
+import com.team06.roadangel.helper.FileHelper;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
@@ -23,6 +24,11 @@ public class RoadAngelActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        // Make sure the AlertNotificationService is started
+        Intent alertServiceIntent = new Intent(this, AlertNotificationService.class);
+        alertServiceIntent.putExtra(getString(R.string.server_key_varname), "XYZ");
+        startService(alertServiceIntent);
 
         openDataSource();
 
