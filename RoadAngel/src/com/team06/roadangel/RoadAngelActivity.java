@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private UserDao persistenceDataSource = null;
     private static User currentUser = null;
+    private static final int GET_CODE = 0;
 
     /**
      * Called when the activity is first created.
@@ -22,38 +22,60 @@ public class RoadAngelActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.register);
 
         openDataSource();
 
         User user = persistenceDataSource.getUser();
 
         // Set the onclick listener for the login button
-        Button loginButton = (Button) findViewById(R.id.submitButton);
-        loginButton.setOnClickListener(new SubmitButtonListener());
+        Button submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new SubmitButtonListener());
+
+        Spinner stateList = (Spinner) findViewById(R.id.selectState);
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.
+                createFromResource(this, R.array.states, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateList.setAdapter(stateAdapter);
+
+        Spinner messageList = (Spinner) findViewById(R.id.messageSelect);
+        ArrayAdapter<CharSequence> messageListAdapter = ArrayAdapter.
+                createFromResource(this, R.array.messages, android.R.layout.simple_spinner_dropdown_item);
+        messageList.setAdapter(messageListAdapter);
 
         // Load the user if they've logged in before
         if(user != null) {
             currentUser = user;
 
+            //TODO: Start server now
+
 //            TextView userName = (TextView) findViewById(R.id.editUserName);
 //            TextView password = (TextView) findViewById(R.id.editPassword);
 //            CheckBox rememberMe = (CheckBox) findViewById(R.id.editRememberMe);
-
+//
 //            if (!user.getUserName().isEmpty()) {
 //                userName.setText(user.getUserName());
 //            }
 //
 //            if(!user.getUserPw().isEmpty() && user.getRemember() == 1) {
-//               password.setText(user.getUserPw());
+//                password.setText(user.getUserPw());
 //                rememberMe.setChecked(true);
 //            }
         }
+        // create an account if there's no user (the application hasn't been used yet
+        else {
+            Intent intent = new Intent(RoadAngelActivity.this, CreateAccountActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();    //To change body of overridden methods use File | Settings | File Templates.
         // Make sure the AlertNotificationService is started
-        Intent intent = new Intent(this, AlertNotificationService.class);
-        intent.putExtra(getString(R.string.server_key_varname), "XYZ");
-        startService(intent);
+        //Intent intent = new Intent(this, AlertNotificationService.class);
+        //intent.getExtras().putString(getString(R.string.server_tag_varname), "XYZ");
+        //startService(intent);
     }
 
     private void openDataSource() {
@@ -62,35 +84,63 @@ public class RoadAngelActivity extends Activity {
         }
     }
 
-    private void doLogin() {
-        TextView userName = (TextView) findViewById(R.id.editUserName);
-        TextView password = (TextView) findViewById(R.id.editPassword);
-        CheckBox remember = (CheckBox) findViewById(R.id.editRememberMe);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        String userNameString = userName.getText().toString();
-        String userPassword = password.getText().toString();
-        boolean rememberMe = remember.isChecked();
-
-        boolean loginSuccessful = true;
-        //TODO: Do login here.
-        if(loginSuccessful) {
-            if(currentUser == null) {
-                persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
-            }
-            else {
-                persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
+        if (requestCode == GET_CODE){
+            if (resultCode == RESULT_OK) {
+                //TODO: Start server
             }
         }
+    }
 
-        //TODO: Call send message screen
+    /**
+     private void doLogin() {
+     TextView userName = (TextView) findViewById(R.id.editUserName);
+     TextView password = (TextView) findViewById(R.id.editPassword);
+     CheckBox remember = (CheckBox) findViewById(R.id.editRememberMe);
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
-        toast.show();
+     String userNameString = userName.getText().toString();
+     String userPassword = password.getText().toString();
+     boolean rememberMe = remember.isChecked();
+
+     boolean loginSuccessful = true;
+     //TODO: Do login here.
+     if(loginSuccessful) {
+     if(currentUser == null) {
+     if(rememberMe) {
+     persistenceDataSource.createUser(userNameString, userPassword, rememberMe);
+     }
+     else {
+     persistenceDataSource.createUser(userNameString, "", rememberMe);
+     }
+     }
+     else {
+     if(rememberMe) {
+     persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, userPassword, rememberMe);
+     }
+     else {
+     persistenceDataSource.updateUser(currentUser.getUserId(), userNameString, "", rememberMe);
+     }
+
+     }
+     }
+
+     //TODO: Call send message screen
+
+     Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT);
+     toast.show();
+     }*/
+
+    private void sendMessage() {
+
     }
 
     private class SubmitButtonListener implements AdapterView.OnClickListener {
         public void onClick(View view) {
-            doLogin();
+            //doLogin();
+            sendMessage();
         }
     }
 }
