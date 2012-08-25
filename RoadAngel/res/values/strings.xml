@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RoadAngel</string>
+    <string name="server_url">http://192.168.8.151:8080/RoadAngel</string>
+    <string name="alert_request_url">checkAlert</string>
+    <string name="alert_request_key_param">key</string>
+    <string name="server_key_varname">serverKey</string>
     <string name="selectstate">Select State</string>
     <string-array name="states">
         <item>AL</item>
