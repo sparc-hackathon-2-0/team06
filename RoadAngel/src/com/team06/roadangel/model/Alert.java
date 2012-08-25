@@ -12,6 +12,16 @@ import java.util.Date;
 public class Alert {
 
     String licensePlate;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    String state;
     String reason;
     Date time;
     String fromKey;
