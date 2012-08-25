@@ -52,7 +52,7 @@ public class AlertNotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String tmp = intent.getExtras().getString(getString(R.string.server_tag_varname));
+        String tmp = intent.getExtras().getString(getString(R.string.server_key_varname));
         if (stringIsNotEmpty(tmp)) {
             serverTag = tmp;
             bRunning = true;
@@ -113,7 +113,7 @@ public class AlertNotificationService extends IntentService {
 
         private String buildAlertRequestUrl(String serverTag) {
             return serverUrl + "/" + getString(R.string.alert_request_url) + "?" +
-                   getString(R.string.alert_request_tag_param) + "=" + serverTag;  //To change body of created methods use File | Settings | File Templates.
+                   getString(R.string.alert_request_key_param) + "=" + serverTag;  //To change body of created methods use File | Settings | File Templates.
         }
 
         private int getAlertCount(String checkAlertResponse) {
