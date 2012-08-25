@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.model.User;
 
@@ -27,8 +29,19 @@ public class RoadAngelActivity extends Activity {
         User user = persistenceDataSource.getUser();
 
         // Set the onclick listener for the login button
-        Button loginButton = (Button) findViewById(R.id.submitButton);
-        loginButton.setOnClickListener(new SubmitButtonListener());
+        Button submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new SubmitButtonListener());
+
+        Spinner stateList = (Spinner) findViewById(R.id.selectState);
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.
+                createFromResource(this, R.array.states, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateList.setAdapter(stateAdapter);
+
+        Spinner messageList = (Spinner) findViewById(R.id.messageSelect);
+        ArrayAdapter<CharSequence> messageListAdapter = ArrayAdapter.
+                createFromResource(this, R.array.messages, android.R.layout.simple_spinner_dropdown_item);
+        messageList.setAdapter(messageListAdapter);
 
         // Load the user if they've logged in before
         if(user != null) {

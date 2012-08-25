@@ -69,6 +69,6 @@
         <item>Something is on top of your car.</item>
         <item>Your car\'s gas cap is open.</item>
         <item>Your car\'s trunk is open.</item>
-        <item>You lost something that you were hauling.</item>
+        <item>Something you were carrying fell.</item>
     </string-array>
 </resources>
