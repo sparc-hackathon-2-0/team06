@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<EditText android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/freeform_text" android:gravity="top" 
+		android:layout_weight="1"/>
+		
+		
+	<Button android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:textSize="30dip"
+		android:layout_weight="0"
+		android:text="Recognizer - Freeform" android:id="@+id/freeform_record"/>
+
+</LinearLayout>

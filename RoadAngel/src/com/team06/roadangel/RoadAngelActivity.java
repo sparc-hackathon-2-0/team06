@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.team06.roadangel;
 
 import android.app.Activity;
@@ -94,4 +95,5 @@ public class RoadAngelActivity extends Activity {
             sendMessage();
         }
     }
+    
 }
