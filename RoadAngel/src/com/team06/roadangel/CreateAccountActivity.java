@@ -81,7 +81,7 @@ public class CreateAccountActivity extends Activity {
         		FileHelper.write(getCacheDir(), "user", xml);
         	}
         	catch(IOException e) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Could not write to file, please try again.", Toast.LENGTH_SHORT);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Could not write to file: " + e + ", please try again.", Toast.LENGTH_SHORT);
         		toast.show();
         		accountCreated = false;
         	}
