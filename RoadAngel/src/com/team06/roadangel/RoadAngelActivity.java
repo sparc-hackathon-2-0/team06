@@ -59,6 +59,15 @@ public class RoadAngelActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();    //To change body of overridden methods use File | Settings | File Templates.
+        // Make sure the AlertNotificationService is started
+        Intent intent = new Intent(this, AlertNotificationService.class);
+        intent.getExtras().putString(getString(R.string.server_tag_varname), "XYZ");
+        startService(intent);
+    }
+
     private void openDataSource() {
         if(persistenceDataSource == null) {
             persistenceDataSource = new UserDao(this);
