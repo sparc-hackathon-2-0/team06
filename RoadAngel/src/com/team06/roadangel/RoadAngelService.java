@@ -99,4 +99,14 @@ public class RoadAngelService {
 
         xmlParser.getXmlFromUrl(url, serverConnectionTimeout, serverPollInterval);
     }
+
+    public void clearAlerts(String serverKey) {
+        String requestUrl = buildClearAlertsUrl(serverKey);
+        String getAlertsResponse = xmlParser.getXmlFromUrl(requestUrl, serverConnectionTimeout,
+                serverPollInterval);
+    }
+    private String buildClearAlertsUrl(String serverKey) {
+        return serverUrl + "/" + appContext.getString(R.string.clear_alerts_request_url) + "?" +
+                appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
+    }
 }

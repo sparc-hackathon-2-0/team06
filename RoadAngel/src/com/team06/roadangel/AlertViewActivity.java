@@ -4,6 +4,9 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 import com.team06.roadangel.model.Alert;
 import view.AlertListAdapter;
@@ -20,6 +23,7 @@ public class AlertViewActivity extends ListActivity {
     private AlertListAdapter adapter = null;
     private Context context;
     RoadAngelService roadAngelService = null;
+    private String serverKey;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +32,11 @@ public class AlertViewActivity extends ListActivity {
         Intent intent = getIntent();
         String key = (String) intent.getExtras().get("key");
         context = getApplicationContext();
-
+        serverKey = key;
         showAlerts(key);
+
+        Button clearAlertsButton = (Button) findViewById(R.id.clearAlertsButton);
+        clearAlertsButton.setOnClickListener(new ClearAlertsListener());
     }
 
     private void startRoadAngelService() {
@@ -69,5 +76,11 @@ public class AlertViewActivity extends ListActivity {
 
         adapter = new AlertListAdapter(context, R.layout.alert, alerts);
         setListAdapter(adapter);
+    }
+
+    private class ClearAlertsListener implements AdapterView.OnClickListener {
+        public void onClick(View view) {
+            roadAngelService.clearAlerts(serverKey);
+        }
     }
 }
