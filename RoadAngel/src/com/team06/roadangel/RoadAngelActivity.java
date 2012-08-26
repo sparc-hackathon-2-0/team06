@@ -7,13 +7,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.helper.FileHelper;
 import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private static final int GET_CODE = 0;
+
+    private RoadAngelService roadAngelService = null;
 
     /**
      * Called when the activity is first created.
@@ -73,9 +78,16 @@ public class RoadAngelActivity extends Activity {
         startService(alertServiceIntent);
     }
 
+    private void startRoadAngelService() {
+        if(roadAngelService == null) {
+            roadAngelService = new RoadAngelService(getApplicationContext());
+        }
+    }
+
     private void checkAlerts(String key) {
         //If key exists, see if the user has any alerts
-        RoadAngelService roadAngelService = new RoadAngelService(getApplicationContext());
+        startRoadAngelService();
+
         int numberOfAlerts = roadAngelService.getAlertCount(key);
 
         if(numberOfAlerts > 0) {
@@ -85,7 +97,26 @@ public class RoadAngelActivity extends Activity {
     }
 
     private void sendMessage() {
+        String key = FileHelper.loadFile(getCacheDir(), "user");
 
+        EditText licensePlate = (EditText) findViewById(R.id.enterLicense);
+        Spinner message = (Spinner) findViewById(R.id.messageSelect);
+        Spinner state = (Spinner) findViewById(R.id.selectState);
+
+        String licenseString = licensePlate.getText().toString();
+        int mesageIndex = message.getSelectedItemPosition();
+        String stateString = state.getSelectedItem().toString();
+
+        startRoadAngelService();
+
+        roadAngelService.sendMessage(key, stateString, licenseString, mesageIndex);
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Thank you for being a Road Angel!", Toast.LENGTH_SHORT);
+        toast.show();
+
+        licensePlate.setText("", TextView.BufferType.EDITABLE);
+        message.setSelection(0);
+        state.setSelection(0);
     }
 
     private class SubmitButtonListener implements AdapterView.OnClickListener {

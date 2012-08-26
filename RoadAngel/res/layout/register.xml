@@ -5,12 +5,14 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/logoView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-	/>
+            android:id="@+id/logoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="27dp"
+            android:src="@drawable/logo_splash" />
 
     <TextView
             android:id="@+id/selectMessage"
@@ -34,21 +36,19 @@
             android:layout_below="@id/messageSelect" />
     <EditText
             android:id="@+id/enterLicense"
-            android:password="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/enterLicensePlate"
             android:layout_alignParentLeft="true"/>
     <TextView
             android:id="@+id/selectStateLabel"
-            android:text="License Plate #"
+            android:text="Select State"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/enterLicense" />
     <Spinner
             android:id="@+id/selectState"
-            android:password="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/selectStateLabel"

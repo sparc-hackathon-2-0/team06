@@ -2,7 +2,10 @@ package com.team06.roadangel;
 
 import android.content.Context;
 import android.text.StaticLayout;
+import android.widget.Toast;
 import com.team06.roadangel.util.XMLParser;
+
+import java.net.URLEncoder;
 
 /**
  * Created with IntelliJ IDEA.
@@ -76,5 +79,12 @@ public class RoadAngelService {
 
     private boolean stringIsNotEmpty(String test) {
         return test != null && !test.isEmpty();
+    }
+
+    public void sendMessage(String key, String state, String licensePlate, int message) {
+        String url = "http://192.168.8.151:8080/RoadAngel/putAlert?key=" + key + "&state=" + state +
+                        "&licensePlate=" + licensePlate + "&reason=" + message;
+
+        xmlParser.getXmlFromUrl(url, serverConnectionTimeout, serverPollInterval);
     }
 }
