@@ -11,9 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.team06.roadangel.dao.UserDao;
 import com.team06.roadangel.helper.FileHelper;
-import com.team06.roadangel.model.User;
 
 public class RoadAngelActivity extends Activity {
     private static final int GET_CODE = 0;
