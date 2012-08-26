@@ -81,6 +81,10 @@ public class AlertViewActivity extends ListActivity {
     private class ClearAlertsListener implements AdapterView.OnClickListener {
         public void onClick(View view) {
             roadAngelService.clearAlerts(serverKey);
+            Intent intent = new Intent();
+            intent.putExtra("key", serverKey);
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 }
