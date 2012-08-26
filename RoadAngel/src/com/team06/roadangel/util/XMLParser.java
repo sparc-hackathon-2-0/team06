@@ -97,7 +97,7 @@ public class XMLParser {
 	/** Getting node value
 	  * @param elem element
 	  */
-	 public final String getElementValue( Node elem ) {
+     public final String getElementValue( Node elem ) {
 	     Node child;
 	     if( elem != null){
 	         if (elem.hasChildNodes()){
@@ -110,4 +110,14 @@ public class XMLParser {
 	     }
 	     return "";
 	 }
+
+    /**
+     * Getting node value
+     * @param item node
+     * @param str string
+     * */
+    public String getValue(Element item, String str) {
+        NodeList n = item.getElementsByTagName(str);
+        return n.item(0).toString();
+    }
 }

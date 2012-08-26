@@ -61,4 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/selectState"
             android:layout_alignParentRight="true"/>
+    
+    
+    <Button
+            android:id="@+id/speakButton"
+            android:text="Speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/submitButton"
+            android:layout_alignParentRight="true"/>
+    
 </RelativeLayout>

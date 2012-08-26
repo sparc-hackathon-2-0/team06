@@ -1,11 +1,11 @@
 package com.team06.roadangel;
 
 import android.content.Context;
-import android.text.StaticLayout;
-import android.widget.Toast;
 import com.team06.roadangel.util.XMLParser;
+import java.util.List;
+import com.team06.roadangel.model.Alert;
+import com.team06.roadangel.util.Deserializer;
 
-import java.net.URLEncoder;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +38,7 @@ public class RoadAngelService {
         String checkAlertResponse = xmlParser.getXmlFromUrl(requestUrl, serverConnectionTimeout,
                 serverPollInterval);
         if (stringIsNotEmpty(checkAlertResponse)) {
-            return getAlertCount(checkAlertResponse);
+            return getAlertCountFromResponse(checkAlertResponse);
         }
         return 0;
     }
@@ -51,6 +51,13 @@ public class RoadAngelService {
             return getKeyFromResponse(registerResponse);
         }
         return "";
+    }
+
+    public List<Alert> getAlerts(String serverKey) {
+        String requestUrl = buildAlertRequestUrl(serverKey);
+        String getAlertsResponse = xmlParser.getXmlFromUrl(requestUrl, serverConnectionTimeout,
+                serverPollInterval);
+        return Deserializer.parseAlerts(getAlertsResponse);
     }
 
     private String buildAlertRequestUrl(String serverKey) {
