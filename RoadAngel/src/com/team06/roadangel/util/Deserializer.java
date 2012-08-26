@@ -37,19 +37,24 @@ public class Deserializer {
 		XMLParser parser = new XMLParser();
 		Document doc = parser.getDomElement(xmlData);
 
-		NodeList alertNodes = doc.getElementsByTagName(KEY_ALERT);
+		NodeList alertsNodes = doc.getElementsByTagName(KEY_ALERTS);
 
-		for (int i = 0; i < alertNodes.getLength(); i++) {
-			Element alertElement = (Element) alertNodes.item(i);
+        for(int i = 0; i < alertsNodes.getLength(); i++) {
+            NodeList alertNodes = alertsNodes.item(i).getChildNodes();
 
-			Alert alert = new Alert();
+            for (int j = 0; j < alertNodes.getLength(); j++) {
 
-			alert.setFromKey(parser.getValue(alertElement, KEY_FROM));
-            alert.setLicensePlate(parser.getValue(alertElement, KEY_LICENSE_PLATE));
-            alert.setState(parser.getValue(alertElement, KEY_STATE));
-            alert.setReason(parser.getValue(alertElement, KEY_REASON));
-			alerts.add(alert);
-		}
+                Element alertElement = (Element) alertNodes.item(i);
+
+                Alert alert = new Alert();
+
+                alert.setFromKey(parser.getValue(alertElement, KEY_FROM));
+                alert.setLicensePlate(parser.getValue(alertElement, KEY_LICENSE_PLATE));
+                alert.setState(parser.getValue(alertElement, KEY_STATE));
+                alert.setReason(parser.getValue(alertElement, KEY_REASON));
+                alerts.add(alert);
+            }
+        }
 
 		return alerts;
 	}

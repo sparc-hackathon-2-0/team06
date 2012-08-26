@@ -29,8 +29,8 @@ public class RoadAngelService {
         this.appContext = appContext;
         xmlParser = new XMLParser();
         serverUrl = appContext.getString(R.string.server_url);
-        serverPollInterval = appContext.getResources().getInteger(R.integer.alert_poll_interval_seconds);
-        serverConnectionTimeout = appContext.getResources().getInteger(R.integer.server_connection_timeout_seconds);
+        serverPollInterval = appContext.getResources().getInteger(R.integer.alert_poll_interval_seconds)*1000;
+        serverConnectionTimeout = appContext.getResources().getInteger(R.integer.server_connection_timeout_seconds)*1000;
     }
 
     public int getAlertCount(String serverKey) {
@@ -54,7 +54,7 @@ public class RoadAngelService {
     }
 
     public List<Alert> getAlerts(String serverKey) {
-        String requestUrl = buildAlertRequestUrl(serverKey);
+        String requestUrl = buildGetAllAlertsRequestUrl(serverKey);
         String getAlertsResponse = xmlParser.getXmlFromUrl(requestUrl, serverConnectionTimeout,
                 serverPollInterval);
         return Deserializer.parseAlerts(getAlertsResponse);
@@ -62,6 +62,11 @@ public class RoadAngelService {
 
     private String buildAlertRequestUrl(String serverKey) {
         return serverUrl + "/" + appContext.getString(R.string.alert_request_url) + "?" +
+                appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
+    }
+
+    private String buildGetAllAlertsRequestUrl(String serverKey) {
+        return serverUrl + "/" + appContext.getString(R.string.get_alerts_request_url) + "?" +
                 appContext.getString(R.string.alert_request_key_param) + "=" + serverKey;
     }
 

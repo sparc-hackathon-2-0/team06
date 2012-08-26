@@ -118,6 +118,7 @@ public class XMLParser {
      * */
     public String getValue(Element item, String str) {
         NodeList n = item.getElementsByTagName(str);
-        return n.item(0).toString();
+        return n.item(0).getTextContent();
+        //return n.item(0).toString();
     }
 }

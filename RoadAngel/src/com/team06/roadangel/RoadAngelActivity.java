@@ -90,6 +90,7 @@ public class RoadAngelActivity extends Activity {
 
         if(numberOfAlerts > 0) {
             Intent intent = new Intent(RoadAngelActivity.this, AlertViewActivity.class);
+            intent.putExtra("key", key);
             startActivity(intent);
         }
     }
